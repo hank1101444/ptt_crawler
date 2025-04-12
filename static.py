@@ -42,7 +42,7 @@ class PTTSpider:
                           "Chrome/122.0.0.0 Safari/537.36"
             }
             scraper = cloudscraper.create_scraper()
-            res = self.session.get(url, headers=headers, timeout=10)
+            res = scraper.get(url, headers=headers, timeout=10)
             if res.status_code != 200:
                 print(f" 抓取失敗：HTTP {res.status_code} - {url}")
                 print("狀態碼：", res.status_code)
