@@ -10,3 +10,4 @@ requests==2.32.3
 soupsieve==2.6
 tzdata==2025.2
 urllib3==2.4.0
+cloudscraper==1.2.71 

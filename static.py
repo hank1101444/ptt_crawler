@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import csv
 import time
 import re
+import cloudscraper
 
 class PTTPost:
     def __init__(self, title, link, date, push_count, content=""):
@@ -40,6 +41,7 @@ class PTTSpider:
                           "AppleWebKit/537.36 (KHTML, like Gecko) "
                           "Chrome/122.0.0.0 Safari/537.36"
             }
+            scraper = cloudscraper.create_scraper()
             res = self.session.get(url, headers=headers, timeout=10)
             if res.status_code != 200:
                 print(f" 抓取失敗：HTTP {res.status_code} - {url}")
