@@ -43,6 +43,8 @@ class PTTSpider:
             res = self.session.get(url, headers=headers, timeout=10)
             if res.status_code != 200:
                 print(f" 抓取失敗：HTTP {res.status_code} - {url}")
+                print("狀態碼：", res.status_code)
+                print("回傳頁面前 300 字：", res.text[:300])
                 return None  # 回傳 None，讓上層決定是否繼續
             res.encoding = 'utf-8'
             return BeautifulSoup(res.text, "html.parser")
