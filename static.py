@@ -129,7 +129,7 @@ class PTTSpider:
             #     print("\n\nafter\n\n")
             #     print(main_content)
                 
-            # Step 3：只保留發信站前的純文字內容
+            # Step 3：only get 發信站 previous text
             text_lines = []
             # .contents 只抓「最外層的直接子節點」
             for content in main_content.descendants:
@@ -147,11 +147,11 @@ class PTTSpider:
         except Exception as e:
             print(f"⚠️ 無法讀取文章：{url}，錯誤：{e}")
             return ""
-
+        
+        
 if __name__ == "__main__":
     #keywords = ["LINE", "蝦皮", "pChome", "優惠"]
-    keywords = ["全聯"]
+    keywords = ["LINE"]
     spider = PTTSpider("Lifeismoney", max_pages=5)
     spider.crawl(keyword_filter=keywords)
     spider.save_to_csv("static.csv")
-
