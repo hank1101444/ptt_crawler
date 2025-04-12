@@ -33,10 +33,18 @@ class PTTSpider:
         self.posts = []
 
     def _fetch_page(self, url):
-        print(f"Fetching: {url}")
-        res = self.session.get(url)
-        res.encoding = 'utf-8'
-        return BeautifulSoup(res.text, "html.parser")
+        print(f" Fetching: {url}")
+        try:
+            res = self.session.get(url, timeout=10)
+            if res.status_code != 200:
+                print(f" 抓取失敗：HTTP {res.status_code} - {url}")
+                return None  # 回傳 None，讓上層決定是否繼續
+            res.encoding = 'utf-8'
+            return BeautifulSoup(res.text, "html.parser")
+        except requests.RequestException as e:
+            print(f" 請求錯誤：{e}")
+            return None
+
 
     def _parse_posts(self, soup, keyword_filter=None):
         entries = soup.select("div.r-ent")
@@ -153,5 +161,10 @@ if __name__ == "__main__":
     #keywords = ["LINE", "蝦皮", "pChome", "優惠"]
     keywords = ["LINE"]
     spider = PTTSpider("Lifeismoney", max_pages=5)
-    spider.crawl(keyword_filter=keywords)
+    try:
+        spider.crawl(keyword_filter=keywords)
+    except Exception as e:
+        print(f"❌ 程式錯誤：{e}")
+        exit(1)
     spider.save_to_csv("static.csv")
+
