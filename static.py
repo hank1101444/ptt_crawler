@@ -35,7 +35,12 @@ class PTTSpider:
     def _fetch_page(self, url):
         print(f" Fetching: {url}")
         try:
-            res = self.session.get(url, timeout=10)
+            headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                          "AppleWebKit/537.36 (KHTML, like Gecko) "
+                          "Chrome/122.0.0.0 Safari/537.36"
+            }
+            res = self.session.get(url, headers=headers, timeout=10)
             if res.status_code != 200:
                 print(f" 抓取失敗：HTTP {res.status_code} - {url}")
                 return None  # 回傳 None，讓上層決定是否繼續
