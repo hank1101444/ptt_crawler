@@ -1,4 +1,4 @@
-name: Daily API Spider
+name: Daily API 
 
 on:
   schedule:
@@ -24,8 +24,8 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Run API Spider
-      run: python static.py
+    - name: Run API 
+      run: python api.py
 
     - name: Upload result (CSV)
       uses: actions/upload-artifact@v4        # 官方提供的上傳工具
