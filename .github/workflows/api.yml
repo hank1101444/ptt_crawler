@@ -34,3 +34,11 @@ jobs:
         path: |
           api1.csv
           api2.csv
+
+    - name: Commit Data Back To GitHub Repo
+      run: |
+        git config --global user.name "crawler-bot"
+        git config --global user.email "hank710535@gmail.com"
+        git add api1.csv api2.csv
+        git commit -m "📊 Daily API data update [auto]" || echo "No changes to commit"
+        git push
