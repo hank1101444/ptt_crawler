@@ -3,12 +3,12 @@ import requests
 apis = [
     {
         'url': 'https://opendata.tycg.gov.tw/api/dataset/a4082497-a866-4fa1-8ebb-4dc9c6e5c46c/resource/22b7362c-04cc-439f-b268-c263bdfc52cb/download',
-        'filename': 'api.csv'  
+        'filename': 'api1.csv'  
     },
-    # {
-    #     'url': 'https://第二個API網址',
-    #     'filename': 'api2.csv'
-    # }
+    {
+        'url': 'https://opendata.tycg.gov.tw/api/dataset/dab92074-e386-4fe0-a2cd-e4f2cd0955f0/resource/410844b8-066d-48bf-b917-5ede11f0c276/download',
+        'filename': 'api2.csv'
+    }
 ]
 
 for api in apis:
