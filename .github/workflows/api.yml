@@ -31,4 +31,6 @@ jobs:
       uses: actions/upload-artifact@v4        # 官方提供的上傳工具
       with:
         name: api-result
-        path: '*.csv' 
+        path: |
+          api1.csv
+          api2.csv
