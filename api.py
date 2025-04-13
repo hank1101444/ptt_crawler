@@ -13,13 +13,16 @@ apis = [
 
 for api in apis:
     response = requests.get(api['url'])
-    
+
     if response.status_code == 200:
-        # 假設原始編碼為 Big5（若錯可改 utf-8-sig 嘗試）
-        response.encoding = 'big5'
+        # ✅ 嘗試用 apparent_encoding 偵測
+        response.encoding = response.apparent_encoding
+
+        # ✅ 將內容寫為 UTF-8 編碼
         with open(api['filename'], 'w', encoding='utf-8', newline='') as f:
             f.write(response.text)
-        print(f"✅ 檔案已成功儲存為 {api['filename']}")
+
+        print(f"✅ 檔案已成功儲存為 {api['filename']}，原始編碼為 {response.encoding}")
     else:
         print(f"❌ 下載失敗：{api['filename']}，狀態碼：{response.status_code}")
 
