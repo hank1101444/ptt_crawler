@@ -12,14 +12,14 @@ apis = [
 ]
 
 for api in apis:
-    # 送出 GET 請求取得資料
     response = requests.get(api['url'])
-
-    # 如果成功下載（狀態碼為 200）
+    
     if response.status_code == 200:
-        # 將內容寫入對應的檔案名稱（以二進位方式寫入）
-        with open(api['filename'], 'wb') as f:
-            f.write(response.content)
-        print(f"✅ 檔案已成功儲存為 {api['filename']}") 
+        # 假設原始編碼為 Big5（若錯可改 utf-8-sig 嘗試）
+        response.encoding = 'big5'
+        with open(api['filename'], 'w', encoding='utf-8', newline='') as f:
+            f.write(response.text)
+        print(f"✅ 檔案已成功儲存為 {api['filename']}")
     else:
-        print(f"❌ 下載失敗（{api['filename']}），狀態碼：{response.status_code}")
+        print(f"❌ 下載失敗：{api['filename']}，狀態碼：{response.status_code}")
+
